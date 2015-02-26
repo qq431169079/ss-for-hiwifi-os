@@ -2,7 +2,9 @@
 
 本插件运行在HiWiFi OS上
 
-文档：https://open.hiwifi.com/
+图标设计：[Artua.com](http://findicons.com/icon/17770/intranet)
+
+开发文档：https://open.hiwifi.com/
 
 ##安装步骤：
 
