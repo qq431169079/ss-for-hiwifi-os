@@ -1,6 +1,6 @@
 #!/bin/sh
 
-version=0.1.0
+version=0.2.5
 
 install() {
     del_opkg_src
@@ -14,7 +14,10 @@ install() {
     opkg install shadowsocks-libev-spec
     opkg install redsocks2
     opkg install ChinaDNS
-    cp config.json /etc/shadowsocks/
+
+    # web安装界面的参数会保存到文件，这里引用参数文件，即可使用变量
+    . ./soho-to-intranet.conf
+    sed -e "s/{server}/$server/" -e "s/{server_port}/$server_port/" -e "s/{local_port}/$local_port/" -e "s/{password}/$password/" -e "s/{method}/$method/" config.json > /etc/shadowsocks/config.json
  
     enable
     start
@@ -57,7 +60,7 @@ enable() {
 status() {
     local stat=running
 
-    wdctl status >/dev/null 2>&1
+    pgrep /usr/bin/ss-redir >/dev/null 2>&1
     CODE="$?"
 
     [ "$CODE" -ne "0" ] && {
