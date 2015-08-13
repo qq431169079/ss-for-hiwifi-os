@@ -110,26 +110,29 @@ remove_dns() {
 
 set_opkg_src() {
     echo "set_opkg_src start"
-    tmp=$(grep 'src/gz hiwifiio http://downloads-hiwifi-io.qiniudn.com/hiwifi_os/' /etc/opkg.conf)
+    tmp=$(grep 'src/gz openwrtio' /etc/opkg.conf)
     if [ $? -eq 0 ]; then
         return 0
     fi
     arch=$(grep '/upgrade_file/' /etc/opkg.conf | awk '{print $3}' | head -1 | awk -F/ '{print $5}' | awk -F- '{print $1}')
-    hiwifiio_src='http://downloads-hiwifi-io.qiniudn.com/hiwifi_os/'$arch'/packages'
+    openwrtio_src='http://downloads.openwrt.io/vendors/gee/'$arch'/packages'
     #hiwifi os use /etc/opkg.conf and /etc/opkg.d/*.conf
-    echo 'src/gz hiwifiio '$hiwifiio_src >> /etc/opkg.conf
     for one_file in $(find /etc/opkg.d/ -iname '*.conf'); do
-        echo 'src/gz hiwifiio '$hiwifiio_src >> $one_file
+        echo 'src/gz openwrtio '$openwrtio_src >> $one_file
     done
+    tmp=$(grep 'src/gz openwrtio' /etc/opkg.conf)
+    if [ $? -ne 0 ]; then
+        echo 'src/gz openwrtio '$openwrtio_src >> /etc/opkg.conf
+    fi
     echo "set_opkg_src end"
     return 0
 }
 
 del_opkg_src() {
     echo "del_opkg_src"
-    sed -i '/^src\/gz hiwifiio /d' /etc/opkg.conf
+    sed -i '/^src\/gz openwrtio /d' /etc/opkg.conf
     for one_file in $(find /etc/opkg.d/ -iname '*.conf'); do
-        sed -i '/^src\/gz hiwifiio /d' $one_file
+        sed -i '/^src\/gz openwrtio /d' $one_file
     done
     return 0
 }
