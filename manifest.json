@@ -2,57 +2,62 @@
     "manifest_version": "2.0.0",
     "configuration": [
         {
-            "name": "协议",
+            "name": "开关",
             "type": "radio",
-            "variable": "protocol",
-            "choices": "ss=ss",
-            "defaultvalue": "ss",
+            "variable": "enable",
+            "choices": "开=1;关=0",
+            "defaultvalue": "1",
             "required": 1
         },
         {
-            "name": "server",
+            "name": "服务器地址",
             "type": "text",
-            "variable": "server_host",
-            "defaultvalue": "hk01.shadowsocks.com.cn",
-            "required": 1,
-            "description": "",
-            "regexpression": ""
+            "variable": "server",
+            "defaultvalue": "",
+            "required": 1
         },
         {
-            "name": "server_port",
+            "name": "端口",
             "type": "text",
-            "variable": "server_port",
-            "defaultvalue": "50388",
-            "required": 1,
-            "description": "",
-            "regexpression": ""
+            "variable": "serverPort",
+            "defaultvalue": "1984",
+            "required": 1
         },
         {
-            "name": "local_port",
-            "type": "text",
-            "variable": "local_port",
-            "defaultvalue": "1080",
-            "required": 1,
-            "description": "",
-            "regexpression": ""
-        },
-        {
-            "name": "password",
+            "name": "密码",
             "type": "text",
             "variable": "password",
             "defaultvalue": "",
-            "required": 1,
-            "description": "",
-            "regexpression": ""
+            "required": 1
         },
         {
-            "name": "method",
+            "name": "超时时间",
+            "type": "text",
+            "variable": "timeout",
+            "defaultvalue": "600",
+            "required": 1
+        },
+        {
+            "name": "加密方式",
             "type": "text",
             "variable": "method",
             "defaultvalue": "aes-256-cfb",
-            "required": 1,
-            "description": "",
-            "regexpression": ""
+            "required": 1
+        },
+        {
+            "name": "运行模式",
+            "type": "radio",
+            "variable": "defaultroute",
+            "choices": "智能模式=0;全局模式=1",
+            "defaultvalue": "0",
+            "required": 1
+        },
+        {
+            "name": "加速DNS",
+            "type": "text",
+            "variable": "dnsserver",
+            "defaultvalue": "8.8.4.4",
+            "required": 1
         }
     ]
 }
